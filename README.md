@@ -1,17 +1,17 @@
 # Análise de preços e vendas de combustíveis com Apache Spark
 
-Trabalho desenvolvido como conclusão do módulo Processamento de Big Data com Apache Spark do **MBA em Engenharia de Dados: Big Data e IA**.
+Trabalho desenvolvido como conclusão do módulo Processamento de Big Data com Apache Spark do **MBA em Engenharia de Dados: Big Data e IA**do instituto Infnet.
 
 ### Problema
 
 O presente projeto integra dados da Agência Nacional do Petróleo (ANP) com informações geográficas e populacionais, obtidas através do Instituto Brasileiro de Geografia e Estatística (IBGE), com o intuito analisar métricas do mercado de combustível brasileiro.
-A solução foi pensada para efetuar processos ETL e ser executada dentro de um ambiente DataBricks.
+A solução foi pensada para efetuar processos ETL, explorar funcionalidades spark, aplicar arquitetura Medallion e tabelas delta, sendo executada dentro de um ambiente DataBricks.
 
 ### Solução
 Foi adotado um pipeline estruturado implementando a estrutura Medallion, em que:
 
-- **Raw:** Arquivos de extração originais, mantidos em um Volume do Unity Catalog;
-- **Bronze:** Ingestão dos arquivos CSV e JSON em tabelas Delta, realizando pouca ou nenhuma alteração dos dados;
+- **Raw:** Arquivos de extração em seu formato original, mantidos em um Volume do Unity Catalog;
+- **Bronze:** Ingestão dos arquivos .csv e .json em tabelas Delta, realizando pouca ou nenhuma alteração dos dados;
 - **Silver:** Conversão de tipos, padronização, validação e integração dos dados das diferentes bases de dados;
 - **Gold:** Geração de indicadores voltadas às métricas do negócio.
 
@@ -21,11 +21,12 @@ Também é realizado o **Streaming** e comparação de **estratégias de otimiza
 
 ### Métricas calculadas
 As métricas de negógcio calculadas constam de: 
-- Preço médio anual por tipo de combustível;
-- Ranking estadual de preço médio por combustível;
-- Ranking estadual de volume vendido por combustível;
-- Ranking estadual de volume vendido por habitante;
-- Ranking estadual de volume vendido por km²;
+1. Preço médio anual por tipo de combustível;
+2. Rankings estaduais;
+    * 2.1. preço médio por combustível;
+    * 2.2. Ranking estadual de volume vendido por combustível;
+    * 2.3. Ranking estadual de volume vendido por habitante;
+    * 2.4. Ranking estadual de volume vendido por km²;
 
 ### Estrutura do projeto
 
@@ -41,4 +42,5 @@ As métricas de negógcio calculadas constam de:
 
 ### Execução
 
-Execute inicialmente `sql/ddl.sql.ipynb` e, depois, os notebooks numerados de `0-Stage` a `5-Optimization`.
+1. Criar as tabelas sql, através da execução de `sql/ddl.sql.ipynb`.
+2. Executar notebooks em ordem crescente; de `0-Stage` a `5-Optimization`.
